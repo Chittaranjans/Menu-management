@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter , usePathname } from 'next/navigation'
 import { Sidebar, SidebarBody, SidebarLink } from "../../components/ui/sidebar";
 import {
   IconArrowLeft,
@@ -11,58 +12,26 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { Links, links } from "../../data/index";
+import Directory from "./directory";
 
 export function SidebarDemo() {
-  const links = [
-    {
-      label: "Dashboard",
-      href: "/",
-      icon: (
-        <Image src="/folder.svg" alt="system" className="text-gray-500 h-6 w-6 flex-shrink-0" width={24} height={24} />
-      ),
-    },
-    {
-      label: "Profile",
-      href: "/profile",
-      icon: (
-        <IconUserBolt className="text-gray-500 h-6 w-6 flex-shrink-0" />
-      ),
-    },
-    {
-      label: "Menu",
-      href: "/menu",
-      icon: (
-        <IconSettings className="text-gray-500 h-6 w-6 flex-shrink-0" />
-      ),
-    },
-    {
-      label: "Logout",
-      href: "/logout",
-      icon: (
-        <IconArrowLeft className="text-gray-500 h-6 w-6 flex-shrink-0" />
-      ),
-    },
-  ];
-
-  const Links = [
-    {
-      label: "Dashboard",
-      href: "/",
-      icon: (
-        <Image src="/folder.svg" alt="system" className="text-white h-6 w-6 flex-shrink-0" width={24} height={24} />
-      ),
-    },
-    {
-      label: "Profile",
-      href: "#",
-      icon: (
-        <Image src="/folder.svg" alt="system" className="text-white h-6 w-6 flex-shrink-0" width={24} height={24} />
-      ),
-    },
-  ];
-
   const [open, setOpen] = useState(true); // Sidebar is open by default
-  const [activeLink, setActiveLink] = useState<string>();
+  const [activeLink, setActiveLink] = useState<string>(""); // Initialize with an empty string
+  
+  const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (pathname) {
+      setActiveLink(pathname);
+    }
+  }, [pathname]);
+
+  const handleLinkClick = (href: string) => {
+    setActiveLink(href);
+    router.push(href);
+  };
 
   return (
     <div className={cn("fixed inset-0 flex ")}>
@@ -80,10 +49,10 @@ export function SidebarDemo() {
                 <SidebarLink
                   key={idx}
                   link={link}
-                  onClick={() => setActiveLink(link.label)}
+                  onClick={() => handleLinkClick(link.href)}
                   className={cn(
                     "text-lg text-gray-500 p-2 rounded-lg",
-                    activeLink === link.label ? "bg-lime-500 text-black" : "hover:bg-gray-400 "
+                    activeLink === link.href ? "bg-lime-500 text-black" : "hover:bg-gray-400"
                   )}
                 />
               ))}
@@ -96,6 +65,9 @@ export function SidebarDemo() {
           </div>
         </SidebarBody>
       </Sidebar>
+      <main className="flex-1 p-4">
+        <Directory activeLink={activeLink} />
+      </main>
     </div>
   );
 }
