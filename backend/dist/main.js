@@ -11,7 +11,7 @@ async function bootstrap() {
         forbidNonWhitelisted: true,
     }));
     app.enableCors({
-        origin: 'https://menu-management-ebon.vercel.app',
+        origin: "https://menu-management-ebon.vercel.app",
     });
     await app.listen(process.env.PORT || 3005);
 }
