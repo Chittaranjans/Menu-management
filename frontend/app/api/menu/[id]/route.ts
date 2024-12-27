@@ -67,9 +67,19 @@ const deleteMenuById = async (id: string) => {
   }
 };
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest) {
   try {
-    const { id } = params;
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+    if (!id) {
+      return NextResponse.json({
+        success: false,
+        message: 'Missing menu ID',
+      }, {
+        status: 400,
+      });
+    }
+
     const menu = await fetchMenuById(id);
     return NextResponse.json(menu, { status: 200 });
   } catch (error) {
@@ -83,9 +93,19 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest) {
   try {
-    const { id } = params;
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+    if (!id) {
+      return NextResponse.json({
+        success: false,
+        message: 'Missing menu ID',
+      }, {
+        status: 400,
+      });
+    }
+
     const updatedMenu = await req.json();
 
     if (!updatedMenu || !updatedMenu.name) {
@@ -117,9 +137,19 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest) {
   try {
-    const { id } = params;
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+    if (!id) {
+      return NextResponse.json({
+        success: false,
+        message: 'Missing menu ID',
+      }, {
+        status: 400,
+      });
+    }
+
     const deleteMenu = await deleteMenuById(id);
 
     return NextResponse.json({
