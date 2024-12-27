@@ -17,8 +17,8 @@ type Menu = {
   depth: number;
   parentId: string | null;
   parentName: string | null;
-  parent: Menu;
-  children: Menu[] | null; 
+  parent: Menu | null;
+  children: Menu[]; 
 };
 
 const defaultMenus: Menu[] = [
@@ -164,7 +164,7 @@ export default function Page() {
   };
 
   const handleMenuClick = (menuId: string) => {
-    dispatch(fetchMenuDetails({ menuId }));
+    dispatch(fetchMenuDetails(Number(menuId)));
     console.log("menuId", menuId);
   };
 

@@ -10,7 +10,7 @@ type Menu = {
   depth: number;
   parentId: string | null;
   parentName: string | null;
-  parent: Menu;
+  parent: Menu | null;
   children: Menu[];
 };
 
