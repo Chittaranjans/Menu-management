@@ -18,7 +18,6 @@ const fetchMenus = async (menuId?: string) => {
       throw new Error(`Failed to fetch menus: ${response ? response.statusText : 'No response'}`);
     }
 
-    
     const data = await response.json();
     return data;
   } catch (error) {
