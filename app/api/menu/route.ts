@@ -5,6 +5,7 @@ const fetchMenus = async (menuId?: string) => {
     const url = menuId 
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/menus?menuId=${menuId}&timestamp=${new Date().getTime()}` 
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/menus?timestamp=${new Date().getTime()}`;
+
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -17,6 +18,7 @@ const fetchMenus = async (menuId?: string) => {
       throw new Error(`Failed to fetch menus: ${response ? response.statusText : 'No response'}`);
     }
 
+    
     const data = await response.json();
     return data;
   } catch (error) {
@@ -119,4 +121,4 @@ export async function POST(req: Request) {
       }
     );
   }
-}
+} 

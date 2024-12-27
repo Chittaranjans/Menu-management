@@ -20,7 +20,7 @@ type TreeItemProps = {
   setExpandedItems: React.Dispatch<
     React.SetStateAction<Record<string | number, boolean>>
   >;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick: any;
 };
 
@@ -65,6 +65,7 @@ const TreeItem: React.FC<TreeItemProps> = ({
           })
         );
         dispatch(fetchMenus({}));
+        console.log("newMenuName", newMenuName);
         setNewMenuName("");
         setIsAdding(false);
       }
@@ -92,11 +93,17 @@ const TreeItem: React.FC<TreeItemProps> = ({
     };
   }, []);
 
+  // Set default children if undefined
+  const children = menu.children ?? [
+    { id: `${menu.id}-child-1`, name: 'Default Child 1', depth: menu.depth + 1, parentId: menu.id, parentName: menu.name, parent: menu, children: [] },
+    { id: `${menu.id}-child-2`, name: 'Default Child 2', depth: menu.depth + 1, parentId: menu.id, parentName: menu.name, parent: menu, children: [] },
+  ];
+
   return (
     <div className="tree-item">
       {/* Parent Item */}
       <div className="py-0.5 flex items-center gap-x-0.5 w-full group">
-        {menu.children && menu.children.length > 0 && (
+        {children.length > 0 && (
           <button
             onClick={toggleExpand}
             className="size-6 flex justify-center items-center hover:bg-gray-100 rounded-md focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
@@ -139,10 +146,10 @@ const TreeItem: React.FC<TreeItemProps> = ({
       )}
 
       {/* Render Children */}
-      {isExpanded && menu.children && menu.children.length > 0 && (
+      {isExpanded && children.length > 0 && (
         <div className="w-full overflow-hidden transition-[height] duration-300">
           <div className="ps-7 relative before:absolute before:top-0 before:start-3 before:w-0.5 before:-ms-px before:h-full before:bg-gray-100 dark:before:bg-neutral-700">
-            {menu.children.map((child) => (
+            {children.map((child) => (
               <TreeItem
                 key={child.id}
                 menu={child}

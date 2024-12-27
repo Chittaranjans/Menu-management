@@ -3,17 +3,17 @@ import { IconUserBolt, IconSettings, IconArrowLeft } from "@tabler/icons-react";
 
 export const links = [
     {
-      label: "Dashboard",
+      label: "System",
       href: "/",
       icon: (
-        <Image src="/folder.svg" alt="system" className="text-gray-500 h-6 w-6 flex-shrink-0" width={24} height={24} />
+        <Image src="/folder.svg" alt="system" className="text-gray-500 h-6 w-6 flex-shrink-0" width={30} height={30} />
       ),
     },
     {
-      label: "Profile",
-      href: "/profile",
+      label: "System code",
+      href: "#",
       icon: (
-        <IconUserBolt className="text-gray-500 h-6 w-6 flex-shrink-0" />
+        <IconSettings className="text-gray-500 h-6 w-6 flex-shrink-0" />
       ),
     },
     {
@@ -25,17 +25,17 @@ export const links = [
     },
     {
       label: "Logout",
-      href: "/logout",
+      href: "#",
       icon: (
-        <IconArrowLeft className="text-gray-500 h-6 w-6 flex-shrink-0" />
+        <IconSettings className="text-gray-500 h-6 w-6 flex-shrink-0" />
       ),
     },
   ];
 
  export const Links = [
     {
-      label: "Dashboard",
-      href: "/",
+      label: "Users",
+      href: "#",
       icon: (
         <Image src="/folder.svg" alt="system" className="text-white h-6 w-6 flex-shrink-0" width={24} height={24} />
       ),
@@ -44,7 +44,7 @@ export const links = [
       label: "Profile",
       href: "#",
       icon: (
-        <Image src="/folder.svg" alt="system" className="text-white h-6 w-6 flex-shrink-0" width={24} height={24} />
+        <IconSettings className="text-gray-500 h-6 w-6 flex-shrink-0" />
       ),
     },
   ];

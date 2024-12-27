@@ -4,6 +4,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from '@/store';
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from 'next/font/local';
+
 // Load fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",

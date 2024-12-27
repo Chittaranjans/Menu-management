@@ -10,7 +10,6 @@ import {
 } from "@/store/menuSlice";
 import TreeItem from "../blocks/treeItem";
 import { Plus } from "lucide-react";
-// import MenuDetail from "../blocks/MenuDetail";
 
 type Menu = {
   id: string;
@@ -19,8 +18,106 @@ type Menu = {
   parentId: string | null;
   parentName: string | null;
   parent: Menu;
-  children: Menu[];
+  children: Menu[] | null; 
 };
+
+const defaultMenus: Menu[] = [
+  {
+    id: '1',
+    name: 'Menu 1',
+    depth: 1,
+    parentId: null,
+    parentName: null,
+    parent: null,
+    children: [
+      {
+        id: '1-1',
+        name: 'Child 1-1',
+        depth: 2,
+        parentId: '1',
+        parentName: 'Menu 1',
+        parent: null,
+        children: [
+          {
+            id: '1-1',
+            name: 'Child 1-1',
+            depth: 2,
+            parentId: '1',
+            parentName: 'Menu 1',
+            parent: null,
+            children: [],
+          },
+          {
+            id: '1-1',
+            name: 'Child 1-1',
+            depth: 2,
+            parentId: '1',
+            parentName: 'Menu 1',
+            parent: null,
+            children: [],
+          },
+        ],
+      },
+      {
+        id: '1-2',
+        name: 'Child 1-2',
+        depth: 2,
+        parentId: '1',
+        parentName: 'Menu 1',
+        parent: null,
+        children: [
+          {
+            id: '1-1',
+            name: 'Child 1-1',
+            depth: 2,
+            parentId: '1',
+            parentName: 'Menu 1',
+            parent: null,
+            children: [],
+          },
+          {
+            id: '1-1',
+            name: 'Child 1-1',
+            depth: 2,
+            parentId: '1',
+            parentName: 'Menu 1',
+            parent: null,
+            children: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: '2',
+    name: 'Menu 2',
+    depth: 1,
+    parentId: null,
+    parentName: null,
+    parent: null,
+    children: [
+      {
+        id: '2-1',
+        name: 'Child 2-1',
+        depth: 2,
+        parentId: '2',
+        parentName: 'Menu 2',
+        parent: null,
+        children: [
+          {
+            id: '1-1',
+            name: 'Child 1-1',
+            depth: 2,
+            parentId: '1',
+            parentName: 'Menu 1',
+            parent: null,
+            children: [],
+          },
+        ],
+      },
+    ],
+  },
+];
 
 export default function Page() {
   const [isDropdown, setIsDropdown] = useState(false);
@@ -30,7 +127,7 @@ export default function Page() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch<AppDispatch>();
   const [expandedItems, setExpandedItems] = useState({});
-  const { menus = [], loading, error } = useSelector(
+  const { menus = defaultMenus ,loading, error } = useSelector(
     (state: RootState) => state.menus
   );
   const dropdownItems = useSelector(
@@ -42,6 +139,7 @@ export default function Page() {
     dispatch(fetchDropdownItems());
   }, [dispatch]);
 
+  
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -65,12 +163,14 @@ export default function Page() {
     setExpandedItems({});
   };
 
-  const handleMenuClick = (menudId: number) => {
-    dispatch(fetchMenuDetails(menudId));
+  const handleMenuClick = (menuId: string) => {
+    dispatch(fetchMenuDetails({ menuId }));
+    console.log("menuId", menuId);
   };
 
   const handleSelectionClick = (item: string) => {
     dispatch(fetchMenus({ menuId: item }));
+    console.log("item", item);
     setIsDropdown(false);
   };
 

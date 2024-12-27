@@ -32,6 +32,9 @@ let MenusController = class MenusController {
     createMenu(data) {
         return this.menusService.createMenu(data);
     }
+    addChildrenToAllMenus(children) {
+        return this.menusService.addChildrenToAllMenus(children);
+    }
     updateMenu(id, data) {
         return this.menusService.updateMenu(id, data);
     }
@@ -67,6 +70,13 @@ __decorate([
     __metadata("design:paramtypes", [create_menu_dto_1.CreateMenuDto]),
     __metadata("design:returntype", void 0)
 ], MenusController.prototype, "createMenu", null);
+__decorate([
+    (0, common_1.Post)('add-children-to-all'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", void 0)
+], MenusController.prototype, "addChildrenToAllMenus", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),

@@ -41,7 +41,7 @@ export function SidebarDemo() {
             <div className="p-4 flex items-center justify-between">
               {open ? <Logo /> : ""}
               <button onClick={() => setOpen(!open)} className="text-white p-2">
-                <Image src="/menu-deep.svg" alt="menu" width={24} height={24} />
+                <Image src="/menu-open.svg" alt="menu" width={24} height={24} />
               </button>
             </div>
             <div className="mt-8 flex flex-col gap-4 p-4 rounded-lg" style={{ backgroundColor: 'rgba(29, 41, 57, 1)' }}>
@@ -57,7 +57,7 @@ export function SidebarDemo() {
                 />
               ))}
             </div>
-            <div className="mt-8 flex flex-col gap-4">
+            <div className="mt-5 ml-4 flex flex-col gap-4 ">
               {Links.map((link, idx) => (
                 <SidebarLink key={idx} link={link} className="text-lg text-white" />
               ))}
@@ -84,7 +84,7 @@ export const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-medium text-white whitespace-pre"
       >
-        Acet Labs
+        <img src="/cloit.png" alt="logo" width={100} height={30} />
       </motion.span>
     </Link>
   );

@@ -35,6 +35,11 @@ export class MenusController {
     return this.menusService.createMenu(data);
   }
 
+  @Post('add-children-to-all')
+  addChildrenToAllMenus(@Body() children: CreateMenuDto[]) {
+    return this.menusService.addChildrenToAllMenus(children);
+  }
+
   @Put(':id')
   updateMenu(@Param('id') id: string, @Body() data: CreateMenuDto) {
     return this.menusService.updateMenu(id, data);

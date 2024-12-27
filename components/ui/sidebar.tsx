@@ -89,11 +89,12 @@ export const DesktopSidebar = ({
     <>
       <motion.div
         className={cn(
-          "h-full px-4 py-4 hidden md:flex md:flex-col bg-gray-700 text-white w-[300px] flex-shrink-0 border-r border-gray-300 dark:border-gray-700 rounded-lg",
+          "h-full px-4 py-4 hidden md:flex md:flex-col bg-gray-700 text-white w-[300px] ml-3 mt-5 mb-10 flex-shrink-0 border-r border-gray-300 dark:border-gray-700 rounded-lg",
           className
         )}
         animate={{
-          width: animate ? (open ? "300px" : "60px") : "300px",
+          width: animate ? (open ? "300px" : "100px") : "300px",
+          height: "95%",
         }}
         onMouseEnter={() => setOpen(true)}
         {...props}

@@ -38,6 +38,8 @@ export const fetchMenus = createAsyncThunk<Menu[], { menuId?: string }>(
   async ({ menuId }) => {
     const url = menuId ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/menus?menuId=${menuId}` : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/menus`;
     const response = await fetch(url);
+    console.log("response", response);
+    console.log(url)
     if (!response.ok) {
       throw new Error('Failed to fetch menus');
     }
@@ -50,10 +52,13 @@ export const fetchMenuDetails = createAsyncThunk<Menu, number>(
   'menus/fetchMenuDetails',
   async (menuId) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/menus/${menuId}`);
+    console.log("response", response);
+
     if (!response.ok) {
       throw new Error('Failed to fetch menu details');
     }
     const data = await response.json();
+    console.log("data", data);
     return data.menu;
   }
 );
@@ -120,6 +125,8 @@ export const fetchDropdownItems = createAsyncThunk(
   "menus/fetchDropdownItems",
   async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/menus/selection`);
+    console.log("response", response);
+  
     if (!response.ok) {
       throw new Error("Failed to fetch dropdown items");
     }
@@ -138,7 +145,7 @@ const menusSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchMenus.pending, (state) => {
-        state.loading = true;
+        state.loading = false;
         state.error = null;
       })
       .addCase(fetchMenus.fulfilled, (state, action) => {
@@ -151,7 +158,7 @@ const menusSlice = createSlice({
       })
 
       .addCase(fetchMenuDetails.pending, (state) => {
-        state.loading = true;
+        state.loading = false;
         state.error = null;
       })
       .addCase(fetchMenuDetails.fulfilled, (state, action) => {
