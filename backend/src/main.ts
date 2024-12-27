@@ -12,6 +12,7 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
+    
     origin: 'https://menu-management-ebon.vercel.app',
   });
 
