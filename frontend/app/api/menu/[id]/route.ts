@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
 const fetchMenuById = async (id: string) => {
   try {
@@ -70,21 +70,13 @@ const deleteMenuById = async (id: string) => {
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const { id } = params;
-  
-    const menuDetails = await fetchMenuById(id);
-  
-    return NextResponse.json({
-      success: true,
-      message: 'Successfully fetched menu details',
-      menu: menuDetails,
-    }, {
-      status: 200,
-    });
+    const menu = await fetchMenuById(id);
+    return NextResponse.json(menu, { status: 200 });
   } catch (error) {
-    console.error('Error fetching menu details:', error);
+    console.error('Error fetching menu:', error);
     return NextResponse.json({
       success: false,
-      message: 'Failed to fetch menu details',
+      message: 'Failed to fetch menu',
     }, {
       status: 500,
     });
@@ -94,9 +86,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const { id } = params;
-    
     const updatedMenu = await req.json();
-  
+
     if (!updatedMenu || !updatedMenu.name) {
       return NextResponse.json({
         success: false,
@@ -107,7 +98,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     }
 
     const updatedMenuDetails = await updateMenuById(id, updatedMenu);
-  
+
     return NextResponse.json({
       success: true,
       message: 'Successfully updated menu',
@@ -129,9 +120,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const { id } = params;
-
     const deleteMenu = await deleteMenuById(id);
-  
+
     return NextResponse.json({
       success: true,
       message: 'Successfully deleted menu',
