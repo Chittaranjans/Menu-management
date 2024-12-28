@@ -54,7 +54,6 @@ export declare class MenusController {
         createdAt: Date;
         updatedAt: Date;
     }>;
-    addChildrenToAllMenus(children: CreateMenuDto[]): Promise<void>;
     updateMenu(id: string, data: CreateMenuDto): Promise<{
         name: string;
         parentId: string | null;

@@ -7,5 +7,5 @@ export class CreateMenuDto {
 
   @IsOptional()
   @IsUUID()
-  parentId?: string;
+  parentId?: string | null;
 }

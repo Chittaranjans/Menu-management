@@ -21,103 +21,103 @@ type Menu = {
   children: Menu[]; 
 };
 
-const defaultMenus: Menu[] = [
-  {
-    id: '1',
-    name: 'Menu 1',
-    depth: 1,
-    parentId: null,
-    parentName: null,
-    parent: null,
-    children: [
-      {
-        id: '1-1',
-        name: 'Child 1-1',
-        depth: 2,
-        parentId: '1',
-        parentName: 'Menu 1',
-        parent: null,
-        children: [
-          {
-            id: '1-1',
-            name: 'Child 1-1',
-            depth: 2,
-            parentId: '1',
-            parentName: 'Menu 1',
-            parent: null,
-            children: [],
-          },
-          {
-            id: '1-1',
-            name: 'Child 1-1',
-            depth: 2,
-            parentId: '1',
-            parentName: 'Menu 1',
-            parent: null,
-            children: [],
-          },
-        ],
-      },
-      {
-        id: '1-2',
-        name: 'Child 1-2',
-        depth: 2,
-        parentId: '1',
-        parentName: 'Menu 1',
-        parent: null,
-        children: [
-          {
-            id: '1-1',
-            name: 'Child 1-1',
-            depth: 2,
-            parentId: '1',
-            parentName: 'Menu 1',
-            parent: null,
-            children: [],
-          },
-          {
-            id: '1-1',
-            name: 'Child 1-1',
-            depth: 2,
-            parentId: '1',
-            parentName: 'Menu 1',
-            parent: null,
-            children: [],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: '2',
-    name: 'Menu 2',
-    depth: 1,
-    parentId: null,
-    parentName: null,
-    parent: null,
-    children: [
-      {
-        id: '2-1',
-        name: 'Child 2-1',
-        depth: 2,
-        parentId: '2',
-        parentName: 'Menu 2',
-        parent: null,
-        children: [
-          {
-            id: '1-1',
-            name: 'Child 1-1',
-            depth: 2,
-            parentId: '1',
-            parentName: 'Menu 1',
-            parent: null,
-            children: [],
-          },
-        ],
-      },
-    ],
-  },
-];
+// const defaultMenus: Menu[] = [
+  // {
+  //   id: '1',
+  //   name: 'Menu 1',
+  //   depth: 1,
+  //   parentId: null,
+  //   parentName: null,
+  //   parent: null,
+  //   children: [
+  //     {
+  //       id: '1-1',
+  //       name: 'Child 1-1',
+  //       depth: 2,
+  //       parentId: '1',
+  //       parentName: 'Menu 1',
+  //       parent: null,
+  //       children: [
+  //         {
+  //           id: '1-1',
+  //           name: 'Child 1-1',
+  //           depth: 2,
+  //           parentId: '1',
+  //           parentName: 'Menu 1',
+  //           parent: null,
+  //           children: [],
+  //         },
+  //         {
+  //           id: '1-1',
+  //           name: 'Child 1-1',
+  //           depth: 2,
+  //           parentId: '1',
+  //           parentName: 'Menu 1',
+  //           parent: null,
+  //           children: [],
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: '1-2',
+  //       name: 'Child 1-2',
+  //       depth: 2,
+  //       parentId: '1',
+  //       parentName: 'Menu 1',
+  //       parent: null,
+  //       children: [
+  //         {
+  //           id: '1-1',
+  //           name: 'Child 1-1',
+  //           depth: 2,
+  //           parentId: '1',
+  //           parentName: 'Menu 1',
+  //           parent: null,
+  //           children: [],
+  //         },
+  //         {
+  //           id: '1-1',
+  //           name: 'Child 1-1',
+  //           depth: 2,
+  //           parentId: '1',
+  //           parentName: 'Menu 1',
+  //           parent: null,
+  //           children: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: '2',
+  //   name: 'Menu 2',
+  //   depth: 1,
+  //   parentId: null,
+  //   parentName: null,
+  //   parent: null,
+  //   children: [
+  //     {
+  //       id: '2-1',
+  //       name: 'Child 2-1',
+  //       depth: 2,
+  //       parentId: '2',
+  //       parentName: 'Menu 2',
+  //       parent: null,
+  //       children: [
+  //         {
+  //           id: '1-1',
+  //           name: 'Child 1-1',
+  //           depth: 2,
+  //           parentId: '1',
+  //           parentName: 'Menu 1',
+  //           parent: null,
+  //           children: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+//];
 
 export default function Page() {
   const [isDropdown, setIsDropdown] = useState(false);
@@ -127,7 +127,7 @@ export default function Page() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch<AppDispatch>();
   const [expandedItems, setExpandedItems] = useState({});
-  const { menus = defaultMenus ,loading, error } = useSelector(
+  const { menus=[] ,loading, error } = useSelector(
     (state: RootState) => state.menus
   );
   const dropdownItems = useSelector(

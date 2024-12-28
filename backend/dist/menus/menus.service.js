@@ -99,14 +99,9 @@ let MenusService = class MenusService {
                 throw new Error('Parent menu not found');
             }
         }
-        const newMenu = await this.prisma.menu.create({
+        return this.prisma.menu.create({
             data: { ...data, depth },
         });
-        await this.addChildrenToMenu(newMenu.id, [
-            { name: 'Child 1', parentId: newMenu.id },
-            { name: 'Child 2', parentId: newMenu.id },
-        ]);
-        return newMenu;
     }
     async updateMenu(id, data) {
         let depth = 1;
@@ -132,7 +127,7 @@ let MenusService = class MenusService {
         else {
             depth = existingMenu.depth;
         }
-        const updatedMenu = await this.prisma.menu.update({
+        return this.prisma.menu.update({
             where: { id },
             data: {
                 name: data.name,
@@ -140,27 +135,11 @@ let MenusService = class MenusService {
                 depth,
             },
         });
-        await this.addChildrenToMenu(updatedMenu.id, [
-            { name: 'Child 1', parentId: updatedMenu.id },
-            { name: 'Child 2', parentId: updatedMenu.id },
-        ]);
-        return updatedMenu;
     }
     async deleteMenu(id) {
         return this.prisma.menu.delete({
             where: { id },
         });
-    }
-    async addChildrenToMenu(menuId, children) {
-        for (const child of children) {
-            await this.createMenu({ ...child, parentId: menuId });
-        }
-    }
-    async addChildrenToAllMenus(children) {
-        const allMenus = await this.prisma.menu.findMany();
-        for (const menu of allMenus) {
-            await this.addChildrenToMenu(menu.id, children);
-        }
     }
 };
 exports.MenusService = MenusService;

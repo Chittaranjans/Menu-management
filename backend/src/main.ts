@@ -12,7 +12,8 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
-    origin: "https://menu-management-ebon.vercel.app",
+    origin: ["https://menu-management-ebon.vercel.app", "http://localhost:3000"],
+
   });
 
   await app.listen(process.env.PORT || 3005);

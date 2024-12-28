@@ -71,6 +71,4 @@ export declare class MenusService {
         createdAt: Date;
         updatedAt: Date;
     }>;
-    addChildrenToMenu(menuId: string, children: CreateMenuDto[]): Promise<void>;
-    addChildrenToAllMenus(children: CreateMenuDto[]): Promise<void>;
 }
